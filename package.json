@@ -1,0 +1,88 @@
+{
+  "name": "locopilot",
+  "displayName": "Locopilot",
+  "description": "An open source locally running copilot to use LLM coding assistants running on your own machine for free. Powered by node-llama-cpp which is powered by llama.cpp.",
+  "version": "0.0.1",
+  "license": "MIT",
+  "publisher": "Simon Fraser",
+  "engines": {
+    "vscode": "^1.84.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "locopilot.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "locopilot.chat",
+        "title": "Chat"
+      },
+      {
+      "command": "locopilot.generate",
+      "title": "Generate"
+      }
+    ],
+    "configuration": {
+      "title": "Locopilot",
+      "properties": {
+        "locopilot.settings.modelPath": {
+          "type": "string",
+          "default": "",
+          "description": "A path to a GGUF model file you'd like to use to generate suggestions and chat with"
+        },
+        "locopilot.settings.promptFormat": {
+          "type": "string",
+          "default": "None",
+          "description": "The prompt format that the chosen model expects. Information about this should be on the page you downloaded the model from. Options are currently \"ChatML\", \"Llama\", \"Falcon\", \"None\", or \"Custom\". If using custom you must set "
+        },
+        "locopilot.settings.systemPrompt": {
+          "type": "string",
+          "default": "You are a superintelligent artificial intelligence assistant, and your purpose is to assist the user with any request they have. If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information.",
+          "description": "The system prompt that will be prepended to any chat request"
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "locopilot",
+          "title": "Locopilot",
+          "icon": "static/ai.svg"
+        }
+      ]
+    },
+    "views": {
+      "explorer": [
+        {
+          "type": "webview",
+          "id": "locopilot.chatView",
+          "name": "Locopilot"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.84.0",
+    "@types/mocha": "^10.0.3",
+    "@types/node": "18.x",
+    "eslint": "^8.52.0",
+    "glob": "^10.3.10",
+    "mocha": "^10.2.0",
+    "typescript": "^5.2.2",
+    "@vscode/test-electron": "^2.3.6"
+  },
+  "dependencies": {
+    "node-llama-cpp": "^2.8.0"
+  }
+}
